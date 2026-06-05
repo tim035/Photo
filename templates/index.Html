@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(Photo)_Rento_ - Аренда фототехники в Казани</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">📸 (Photo)_RentO_TM.</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <nav class="nav-menu" id="navMenu">
+                <a href="#catalog" onclick="showCatalog()">Каталог</a>
+                <a href="#how-it-works">Как работает</a>
+                <a href="#reviews">Отзывы</a>
+                <a href="#contacts">Контакты</a>
+                <a href="#" onclick="openAuthModal()" id="authLink">Войти</a>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i id="themeIcon" class="fas fa-moon"></i>
+                </button>
+                <a href="#" class="cart-btn" onclick="toggleCart()">🛒 <span id="cartCount">0</span></a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Аренда профессиональной<br>фото и видеотехники в Казани</h1>
+            <p>Более 1000 единиц техники для ваших проектов</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Поиск техники..." id="searchInput" onkeyup="searchProducts()">
+                <button onclick="searchProducts()">🔍 Найти</button>
+            </div>
+        </section>
+
+        <section class="categories" id="catalog">
+            <h2>Категории</h2>
+            <div class="category-grid">
+                <div class="category-card" onclick="filterByCategory('cameras')"><i class="fas fa-camera"></i><h3>Фотоаппараты</h3></div>
+                <div class="category-card" onclick="filterByCategory('lenses')"><i class="fas fa-search"></i><h3>Объективы</h3></div>
+                <div class="category-card" onclick="filterByCategory('video')"><i class="fas fa-video"></i><h3>Видеокамеры</h3></div>
+                <div class="category-card" onclick="filterByCategory('light')"><i class="fas fa-lightbulb"></i><h3>Свет</h3></div>
+                <div class="category-card" onclick="filterByCategory('audio')"><i class="fas fa-microphone"></i><h3>Звук</h3></div>
+                <div class="category-card" onclick="filterByCategory('stabilizers')"><i class="fas fa-balance-scale"></i><h3>Стабилизаторы</h3></div>
+                <div class="category-card" onclick="filterByCategory('all')"><i class="fas fa-th-large"></i><h3>Все товары</h3></div>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <div class="section-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem">
+                <h2>🔥 Популярные товары</h2>
+                <select id="sortSelect" onchange="sortProducts()" style="padding:0.5rem 1rem; border-radius:10px; background:var(--bg-card); color:var(--text); border:1px solid var(--border)">
+                    <option value="popular">По популярности</option>
+                    <option value="price-asc">Цена: по возрастанию</option>
+                    <option value="price-desc">Цена: по убыванию</option>
+                </select>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+            <div class="load-more"><button onclick="loadMoreProducts()" id="loadMoreBtn">Показать еще</button></div>
+        </section>
+
+        <section class="how-it-works" id="how-it-works">
+            <h2>Как это работает</h2>
+            <div class="steps-grid">
+                <div class="step-card"><div class="step-number">1</div><i class="fas fa-search"></i><h3>Выберите технику</h3><p>Найдите нужное оборудование</p></div>
+                <div class="step-card"><div class="step-number">2</div><i class="fas fa-calendar-alt"></i><h3>Укажите даты</h3><p>Выберите удобные даты</p></div>
+                <div class="step-card"><div class="step-number">3</div><i class="fas fa-credit-card"></i><h3>Оплатите</h3><p>Безопасная оплата онлайн</p></div>
+                <div class="step-card"><div class="step-number">4</div><i class="fas fa-box"></i><h3>Получите</h3><p>Самовывоз или доставка</p></div>
+            </div>
+        </section>
+
+        <section class="reviews" id="reviews">
+            <div class="reviews-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem">
+                <h2>⭐ Отзывы клиентов</h2>
+                <button class="add-review-btn" onclick="openReviewModal()" style="background:var(--gradient); border:none; padding:0.8rem 1.5rem; border-radius:50px; color:white; font-weight:600; cursor:pointer">
+                    ✍️ Оставить отзыв
+                </button>
+            </div>
+            <div class="reviews-slider" id="reviewsSlider"></div>
+        </section>
+
+        <section class="contacts" id="contacts">
+            <h2>Контакты</h2>
+            <div class="contacts-grid">
+                <div class="contact-info">
+                    <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><h3>Адрес самовывоза</h3><p>г. Казань, ул. Баумана, д. 15</p><small>ст. м. Кремлёвская</small></div></div>
+                    <div class="contact-item"><i class="fas fa-phone"></i><div><h3>Телефон</h3><p>+7 (843) 123-45-67</p></div></div>
+                    <div class="contact-item"><i class="fas fa-envelope"></i><div><h3>Email</h3><p>info@photorent.ru</p></div></div>
+                    <div class="contact-item"><i class="fas fa-clock"></i><div><h3>Часы работы</h3><p>Пн-Пт: 10:00 - 20:00<br>Сб-Вс: 11:00 - 18:00</p></div></div>
+                    <div class="pickup-details" style="background:var(--bg-secondary); padding:1rem; border-radius:12px; margin-top:1rem">
+                        <h4>📍 Как добраться:</h4>
+                        <p>• Выход из метро "Кремлёвская" №2</p>
+                        <p>• Направо 100 метров, вход в ТЦ "Бауманский"</p>
+                        <p>• Офис 305, 3 этаж</p>
+                        <p>• ☎️ Позвоните за 15 минут до прихода</p>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <iframe src="https://yandex.ru/map-widget/v1/?ll=49.123%2C55.796&z=15" frameborder="0"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Profile -->
+    <div class="profile-section" id="profileSection">
+        <div style="padding:2rem">
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar">👤</div>
+                <div><h2 id="userName"></h2><p id="userEmail"></p></div>
+                <button class="logout-btn" onclick="logout()">🚪 Выйти</button>
+            </div>
+            <div class="profile-tabs">
+                <button class="profile-tab active" onclick="switchProfileTab('bookings')">Мои бронирования</button>
+                <button class="profile-tab" onclick="switchProfileTab('settings')">Настройки</button>
+            </div>
+            <div class="profile-content" id="profileContent"></div>
+            <button class="logout-btn" onclick="closeAllModals()" style="margin-top:1rem; background:var(--border); color:var(--text)">✕ Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div style="padding:2rem">
+            <div class="profile-header">
+                <h2>🛡️ Админ-панель</h2>
+                <button class="logout-btn" onclick="closeAdminPanel()">✕ Закрыть</button>
+            </div>
+            <div class="admin-stats">
+                <div class="stat-card"><i class="fas fa-users"></i><div class="stat-value" id="statTotalUsers">0</div><div>Пользователей</div></div>
+                <div class="stat-card"><i class="fas fa-calendar-check"></i><div class="stat-value" id="statTotalBookings">0</div><div>Бронирований</div></div>
+                <div class="stat-card"><i class="fas fa-play-circle"></i><div class="stat-value" id="statActiveBookings">0</div><div>Активных</div></div>
+                <div class="stat-card"><i class="fas fa-ruble-sign"></i><div class="stat-value" id="statTotalRevenue">0 ₽</div><div>Выручка</div></div>
+                <div class="stat-card"><i class="fas fa-star"></i><div class="stat-value" id="statTotalReviews">0</div><div>Отзывов</div></div>
+            </div>
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="switchAdminTab('stats')">📊 Статистика</button>
+                <button class="admin-tab" onclick="switchAdminTab('bookings')">📋 Бронирования</button>
+                <button class="admin-tab" onclick="switchAdminTab('products')">📦 Товары</button>
+                <button class="admin-tab" onclick="switchAdminTab('users')">👥 Пользователи</button>
+                <button class="admin-tab" onclick="switchAdminTab('reviews')">💬 Отзывы</button>
+            </div>
+            <div id="adminStatsContent" class="admin-tab-content"><div style="padding:2rem;text-align:center">✅ Статистика загружена выше</div></div>
+            <div id="adminBookingsContent" class="admin-tab-content" style="display:none"><div class="admin-table" id="adminBookingsList"></div></div>
+            <div id="adminProductsContent" class="admin-tab-content" style="display:none"><div class="admin-table" id="adminProductsList"></div></div>
+            <div id="adminUsersContent" class="admin-tab-content" style="display:none"><div class="admin-table" id="adminUsersList"></div></div>
+            <div id="adminReviewsContent" class="admin-tab-content" style="display:none"><div class="admin-table" id="adminReviewsList"></div></div>
+        </div>
+    </div>
+
+    <!-- Cart -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div style="padding:1rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center">
+            <h3>🛒 Корзина</h3>
+            <button onclick="toggleCart()" style="background:none; border:none; font-size:1.5rem; cursor:pointer">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total"><span>Итого:</span><span id="cartTotal">0 ₽</span></div>
+            <button class="checkout-btn" onclick="openBookingModal()">Оформить аренду</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeAllModals()"></div>
+
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-tabs">
+            <button class="auth-tab active" onclick="switchAuthTab('login')">Вход</button>
+            <button class="auth-tab" onclick="switchAuthTab('register')">Регистрация</button>
+        </div>
+        <div class="auth-form active" id="loginForm">
+            <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="user@example.com"></div>
+            <div class="form-group"><label>Пароль</label><input type="password" id="loginPassword" placeholder="******"></div>
+            <button class="auth-submit" onclick="login()">🔑 Войти</button>
+        </div>
+        <div class="auth-form" id="registerForm">
+            <div class="form-group"><label>Имя</label><input type="text" id="registerName" placeholder="Иван"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="registerEmail" placeholder="ivan@mail.ru"></div>
+            <div class="form-group"><label>Пароль</label><input type="password" id="registerPassword" placeholder="******"></div>
+            <div class="form-group"><label>Подтвердите</label><input type="password" id="registerConfirmPassword" placeholder="******"></div>
+            <button class="auth-submit" onclick="register()">📝 Зарегистрироваться</button>
+        </div>
+        <button class="logout-btn" onclick="closeAllModals()" style="margin-top:1rem; width:100%">Закрыть</button>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="booking-modal" id="bookingModal">
+        <div style="padding:2rem">
+            <div style="display:flex; justify-content:space-between; margin-bottom:1.5rem">
+                <h3>Оформление аренды</h3>
+                <button onclick="closeBookingModal()" style="background:none; border:none; font-size:1.5rem; cursor:pointer">✕</button>
+            </div>
+
+            <div class="pickup-address-card" style="background:var(--gradient); border-radius:15px; padding:1rem; margin-bottom:1.5rem; color:white">
+                <h4>📍 Пункт самовывоза</h4>
+                <p><i class="fas fa-map-marker-alt"></i> г. Казань, ул. Баумана, д. 15</p>
+                <p><i class="fas fa-subway"></i> м. Кремлёвская, выход №2</p>
+                <p><i class="fas fa-clock"></i> Вт-Вс: 11:00 - 20:00</p>
+                <p><i class="fas fa-phone"></i> +7 (843) 123-45-67</p>
+            </div>
+
+            <div class="booking-dates">
+                <h4>📅 Даты аренды</h4>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0">
+                    <div><label>Начало</label><input type="date" id="startDate" class="date-input" onchange="calculateTotal()" style="width:100%; padding:0.5rem; border-radius:10px; background:var(--bg); color:var(--text); border:1px solid var(--border)"></div>
+                    <div><label>Окончание</label><input type="date" id="endDate" class="date-input" onchange="calculateTotal()" style="width:100%; padding:0.5rem; border-radius:10px; background:var(--bg); color:var(--text); border:1px solid var(--border)"></div>
+                </div>
+            </div>
+            <div class="booking-items" id="bookingItems"></div>
+            <div class="booking-total" style="background:var(--bg-secondary); padding:1rem; border-radius:15px; margin:1rem 0">
+                <div style="display:flex; justify-content:space-between"><span>Аренда (<span id="daysCount">1</span> дн.)</span><span id="subtotal">0 ₽</span></div>
+                <div style="display:flex; justify-content:space-between"><span>Страховка (10%)</span><span id="insurance">0 ₽</span></div>
+                <div style="display:flex; justify-content:space-between; font-size:1.2rem; font-weight:700; margin-top:0.5rem; padding-top:0.5rem; border-top:1px solid var(--border)"><span>Итого</span><span id="totalAmount">0 ₽</span></div>
+            </div>
+            <div class="booking-delivery">
+                <h4>🚚 Способ получения</h4>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0">
+                    <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer"><input type="radio" name="delivery" value="pickup" checked onchange="toggleDeliveryAddress()"> 📍 Самовывоз (Казань, Баумана 15)</label>
+                    <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer"><input type="radio" name="delivery" value="delivery" onchange="toggleDeliveryAddress()"> 🚚 Доставка</label>
+                </div>
+                <div id="deliveryAddressGroup" style="display:none">
+                    <input type="text" id="deliveryAddress" placeholder="Введите адрес доставки" style="width:100%; padding:0.8rem; border-radius:12px; border:1px solid var(--border); background:var(--bg); color:var(--text)">
+                </div>
+            </div>
+            <div class="booking-payment">
+                <h4>💳 Способ оплаты</h4>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0">
+                    <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer"><input type="radio" name="payment" value="card" checked> 💳 Банковская карта</label>
+                    <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer"><input type="radio" name="payment" value="cash"> 💵 Наличными</label>
+                </div>
+            </div>
+            <button class="confirm-booking" onclick="confirmBooking()">✅ Подтвердить бронирование</button>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="review-modal" id="reviewModal">
+        <div style="padding:2rem">
+            <div style="display:flex; justify-content:space-between; margin-bottom:1.5rem">
+                <h3>✍️ Оставить отзыв</h3>
+                <button onclick="closeReviewModal()" style="background:none; border:none; font-size:1.5rem; cursor:pointer">✕</button>
+            </div>
+
+            <div class="form-group">
+                <label>Оценка</label>
+                <div class="star-rating" style="display:flex; gap:0.5rem; font-size:2rem; cursor:pointer; margin:1rem 0">
+                    <i class="fas fa-star" onclick="setRating(1)"></i>
+                    <i class="fas fa-star" onclick="setRating(2)"></i>
+                    <i class="fas fa-star" onclick="setRating(3)"></i>
+                    <i class="fas fa-star" onclick="setRating(4)"></i>
+                    <i class="fas fa-star" onclick="setRating(5)"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Ваш отзыв</label>
+                <textarea id="reviewText" rows="4" placeholder="Расскажите о вашем опыте аренды..." style="width:100%; padding:0.8rem; border-radius:12px; border:1px solid var(--border); background:var(--bg); color:var(--text)"></textarea>
+            </div>
+
+            <button class="submit-review-btn" onclick="submitReview()" style="width:100%; background:var(--gradient); border:none; padding:1rem; border-radius:12px; color:white; font-weight:600; cursor:pointer">📝 Отправить отзыв</button>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/cart.js"></script>
+    <script src="/static/js/bookings.js"></script>
+    <script src="/static/js/admin.js"></script>
+    <script>
+        // Инициализация
+        checkAuth();
+        loadCart();
+        updateCartCount();
+
+        // Функции для отзывов
+        window.selectedRating = 5;
+
+        function setRating(rating) {
+            window.selectedRating = rating;
+            const stars = document.querySelectorAll('.star-rating i');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                    star.style.color = '#fbbf24';
+                } else {
+                    star.classList.remove('active');
+                    star.style.color = '#cbd5e1';
+                }
+            });
+        }
+
+        function openReviewModal() {
+            if (!currentUser) {
+                openAuthModal();
+                return showNotification('Войдите, чтобы оставить отзыв', 'info');
+            }
+            document.getElementById('reviewModal').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+            document.getElementById('reviewText').value = '';
+            setRating(5);
+        }
+
+        function closeReviewModal() {
+            document.getElementById('reviewModal').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        async function submitReview() {
+            const text = document.getElementById('reviewText').value;
+            const rating = window.selectedRating || 5;
+
+            if (!text || text.trim().length < 10) {
+                return showNotification('Напишите отзыв (минимум 10 символов)', 'error');
+            }
+
+            try {
+                const res = await fetch('/api/reviews/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: text.trim(), rating: rating })
+                });
+
+                if (res.ok) {
+                    showNotification('Спасибо за отзыв!');
+                    closeReviewModal();
+                    loadReviews();
+                } else {
+                    const err = await res.json();
+                    showNotification(err.error || 'Ошибка', 'error');
+                }
+            } catch(e) {
+                showNotification('Ошибка отправки', 'error');
+            }
+        }
+
+        // Переопределяем loadReviews для обновления
+        async function loadReviews() {
+            try {
+                const res = await fetch('/api/reviews');
+                const data = await res.json();
+                const slider = document.getElementById('reviewsSlider');
+                if (!slider) return;
+
+                if (data.reviews.length === 0) {
+                    slider.innerHTML = '<p style="text-align:center; padding:2rem;">Пока нет отзывов. Будьте первым!</p>';
+                    return;
+                }
+
+                function escapeHtml(text) {
+                    const div = document.createElement('div');
+                    div.textContent = text;
+                    return div.innerHTML;
+                }
+
+                slider.innerHTML = data.reviews.map(r => `
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">${r.user_name.charAt(0)}</div>
+                            <div>
+                                <h4>${escapeHtml(r.user_name)}</h4>
+                                <div class="review-rating">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+                            </div>
+                        </div>
+                        <p class="review-text">"${escapeHtml(r.text)}"</p>
+                        <div class="review-date" style="font-size:0.75rem; color:var(--text-light); margin-top:0.5rem">${r.created_at}</div>
+                    </div>
+                `).join('');
+            } catch(e) {
+                console.error('Ошибка загрузки отзывов:', e);
+            }
+        }
+
+        // Инициализируем звёзды при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            setRating(5);
+        });
+    </script>
+</body>
+</html>

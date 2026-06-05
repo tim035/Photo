@@ -1,0 +1,84 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Sony A7 III",
+      "category": "cameras",
+      "price": 2500,
+      "image": "/static/images/sony-a7iii.jpg",
+      "description": "Полнокадровая беззеркальная камера 24MP. Отличная автофокусировка, 10 fps, 4K видео.",
+      "is_new": true,
+      "popularity": 95
+    },
+    {
+      "id": 2,
+      "name": "Canon EOS R5",
+      "category": "cameras",
+      "price": 3500,
+      "image": "/static/images/canon-eos-r5.jpg",
+      "description": "Профессиональная беззеркальная камера 45MP. 8K видео, IBIS, потрясающее качество.",
+      "is_new": true,
+      "popularity": 98
+    },
+    {
+      "id": 3,
+      "name": "Sony FE 24-70mm f/2.8 GM",
+      "category": "lenses",
+      "price": 1800,
+      "image": "/static/images/sony-24-70mm.jpg",
+      "description": "Профессиональный зум-объектив. Постоянная диафрагма f/2.8, быстрый автофокус.",
+      "is_new": false,
+      "popularity": 92
+    },
+    {
+      "id": 4,
+      "name": "DJI Ronin-S",
+      "category": "stabilizers",
+      "price": 800,
+      "image": "/static/images/dji-ronin-s.jpg",
+      "description": "Трехосевой стабилизатор для камер. Плавная съемка, управление с телефона.",
+      "is_new": false,
+      "popularity": 88
+    },
+    {
+      "id": 5,
+      "name": "Canon EF 70-200mm f/2.8L IS III",
+      "category": "lenses",
+      "price": 2200,
+      "image": "/static/images/canon-70-200mm.jpg",
+      "description": "Телеобъектив для спорта и природы. Стабилизатор на 4 стопа, быстрый автофокус.",
+      "is_new": false,
+      "popularity": 94
+    },
+    {
+      "id": 6,
+      "name": "Blackmagic Pocket Cinema 6K",
+      "category": "video",
+      "price": 2800,
+      "image": "/static/images/blackmagic-6k.jpg",
+      "description": "Профессиональная кинокамера 6K. Запись в RAW, два слота для CFast.",
+      "is_new": true,
+      "popularity": 96
+    },
+    {
+      "id": 7,
+      "name": "Aputure 120d II",
+      "category": "light",
+      "price": 600,
+      "image": "/static/images/aputure-120d.jpg",
+      "description": "Светодиодный осветитель 120W. Бесшумный вентилятор, Bowens mount, DMX управление.",
+      "is_new": false,
+      "popularity": 85
+    },
+    {
+      "id": 8,
+      "name": "Rode NTG4+",
+      "category": "audio",
+      "price": 400,
+      "image": "/static/images/rode-ntg4.jpg",
+      "description": "Профессиональный направленный микрофон. Батарея до 150 часов, низкий уровень шума.",
+      "is_new": false,
+      "popularity": 82
+    }
+  ]
+}
